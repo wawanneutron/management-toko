@@ -31,14 +31,22 @@
 
         <!-- Heading -->
         <div class="sidebar-heading">
-          Travel
+          Data Users
         </div>
-        
-        {{-- paket travel --}}
+
+         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('data-users.index') }}">
-              <i class="fas fa-fw fa-luggage-cart"></i>
-              <span>Create Users</span></a>
+          <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Manage Users</span>
+          </a>
+          <div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+              <h6 class="collapse-header">This Components Users:</h6>
+              <a class="collapse-item" href="{{ route('data-users.index') }}">Data users</a>
+              <a class="collapse-item" href="{{ route('create-users.create') }}">Add Users</a>
+            </div>
+          </div>
         </li>
                  
                 
@@ -47,35 +55,26 @@
   
         <!-- Heading -->
         <div class="sidebar-heading">
-          Galeri
+          Categories
         </div>
         
-        {{-- galeri travel --}}
+          <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item">
-        <a class="nav-link" href="{{ route('home') }}">
-              <i class="fas fa-fw fa-images"></i>
-              <span>Galeri Travel</span></a>
+          <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Manage Categories</span>
+          </a>
+          <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+              <h6 class="collapse-header">This Components Users:</h6>
+              <a class="collapse-item" href="{{ route('categories.index') }}">Data categories</a>
+              <a class="collapse-item" href="{{ route('categories.create') }}">Add Category</a>
+            </div>
+          </div>
         </li>
 
          <!-- Divider -->
          <hr class="sidebar-divider">
-  
-         <!-- Heading -->
-         <div class="sidebar-heading">
-           Transaksi
-         </div>
-         
-         {{-- Transaksi --}}
-         <li class="nav-item">
-             <a class="nav-link" href="{{ route('home') }}">
-               <i class="fas fa-fw fa-dollar-sign"></i>
-               <span>Transaksi</span></a>
-         </li>
-
-        <!-- Divider -->
-        <hr class="sidebar-divider">
- 
-  
         <!-- Sidebar Toggler (Sidebar) -->
         <div class="text-center d-none d-md-inline">
           <button class="rounded-circle border-0" id="sidebarToggle"></button>

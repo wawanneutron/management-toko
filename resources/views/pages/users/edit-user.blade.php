@@ -24,25 +24,25 @@
         @method('PUT')
         @csrf
         <div class="row mt-4 justify-content-center">
-          <div class="col-lg-4">
+          <div class="col-12 col-sm-4 col-md-4 col-lg-4">
             <label for="">Profile pict</label>
               <div class="form-group">
                 @if ($item->avatar)
-                  <img src="{{ asset('storage/'.$item->avatar) }}" width="150px;" alt="" class=" img-thumbnail">
+                  <img src="{{ asset('storage/' . $item->avatar) }}" width="150px;" alt="" class=" img-thumbnail">
                 @else
                     <p>No profile pict</p>
                 @endif
-                <input type="file" class=" form-control">
+                <input type="file" class=" form-control" name="avatar">
                 <small class=" text-muted">Kosongkan jika tidak ingin mengubah photo</small>
               </div>
           </div>
-          <div class="col-lg-6">
+          <div class="col-12 col-sm-6 col-md-6 col-lg-6">
             <div class="form-group">
               <label for="name">Name</label>
               <input type="text" name="name" class=" form-control" value="{{ old('name') }} {{ $item->name }}">
             </div>
 
-            <div class="form-group">
+            <div class="form-group"> 
               <label for="username">Username</label>
               <input type="text" name="username" class=" form-control" value="{{ old('username') }} {{ $item->username }}">
             </div>
@@ -65,16 +65,18 @@
 
             <div class="form-group">
               <input type="checkbox" {{ in_array ('ADMIN', json_decode($item->roles)) ? 'checked' : "" }} name="roles[]" id="" value="ADMIN" class=" custom-checkbox">
-              <label for="admin" {{ in_array ('ADMIN', json_decode($item->roles)) ? 'checked' : "" }} class="mr-3">Administrator</label>
-              <input type="checkbox" name="roles[]" id="" value="STAFF" class=" custom-checkbox">
-              <label for="staff" {{ in_array ('ADMIN', json_decode($item->roles)) ? 'checked' : "" }} class=" mr-3">Staff</label>
-              <input type="checkbox" name="roles[]" id="" value="CUSTOMER" class=" custom-checkbox">
-              <label for="Customer" {{ in_array ('ADMIN', json_decode($item->roles)) ? 'checked' : "" }} class=" mr-3">Customer</label>
+              <label for="admin"  class="mr-3">Administrator</label>
+
+              <input type="checkbox" name="roles[]" id="" value="STAFF" class=" custom-checkbox" {{ in_array ('STAFF', json_decode($item->roles)) ? 'checked' : "" }}>
+              <label for="Staff"  class=" mr-3">Staff</label>
+
+              <input type="checkbox" name="roles[]" id="" value="CUSTOMER" class=" custom-checkbox" {{ in_array ('CUSTOMER', json_decode($item->roles)) ? 'checked' : "" }}>
+              <label for="Customer"  class=" mr-3">Customer</label>
             </div>
          
             <div class="form-group">
               <label for="phone">Phone number</label>
-              <input type="text" name="phone" class=" form-control" value="{{ old('phone') }}">
+              <input type="text" name="phone" class=" form-control" value="{{ old('phone') }} {{ $item->phone }}" >
             </div>
 
             <div class="form-group">
@@ -84,7 +86,7 @@
           
             <div class="form-group">
               <label for="address">Address</label>
-              <textarea value="{{ old('address') }}" name="address" id="" rows="5" class=" form-control"></textarea>
+              <textarea  name="address" id="" rows="5" class=" form-control" >{{ $item->address }}</textarea>
             </div>
   
             <input type="submit" class="btn btn-success btn-block" value="save"></input>

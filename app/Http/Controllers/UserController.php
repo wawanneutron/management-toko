@@ -16,9 +16,25 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
+        $users = User::paginate(10);
+
+        $filterByEmail = $request->get('keyword');
+        $status = $request->get('status');
 
 
-        $users = User::all();
+        if ($status) {
+
+            $users = User::where('email', 'LIKE', "%$filterByEmail%")
+                ->where('status', $status)
+                ->paginate(10);
+        } else if ($filterByEmail) {
+
+            $users = User::where('email', 'LIKE', "%$filterByEmail%")
+                ->paginate(10);
+        }
+
+
+
 
         return view('pages.users.data_users', [
             'users' => $users
@@ -76,7 +92,11 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::findOrFail($id);
+
+        return view('pages.users.details-user', [
+            'user' => $user
+        ]);
     }
 
     /**
@@ -115,11 +135,17 @@ class UserController extends Controller
         // menghandle jika ada request bertipe file dengan name='avatar'
         if ($request->file('avatar')) {
 
-            if ($user->avatar && file_exists(storage_path('app/public' . $user->avatar))) {
-                Storage::delete('public' . $user->avatar);
+            // cek lagi, jika photo user yang ingin di edit ini memiliki file avatar , dan file tersebut ada diserver kita ? jika ada hapus file tersebut dong dan lakukan perubahan tentunya
+            if ($user->avatar && file_exists(storage_path('app/public/' . $user->avatar))) {
+
+                Storage::delete('public/' . $user->avatar);
+                $file = $request->file('avatar')->store('avatars', 'public');
+                $user->avatar = $file;
             }
 
+            // kalo tidak ada profile di server maka lakukan penyimpanan.
             $file = $request->file('avatar')->store('avatars', 'public');
+
             $user->avatar = $file;
         }
 
@@ -134,8 +160,12 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        $user = User::findOrFail($id);
+
+        $user->delete();
+
+        return redirect()->route('data-users.index')->with('status-danger', 'User has ben deleted');
     }
 }
