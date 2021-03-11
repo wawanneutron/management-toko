@@ -26,17 +26,27 @@
             <div class="col-lg-8">
             <div class="form-group">
               <label for="name">Name</label>
-              <input type="text" name="name" class=" form-control" value="{{ old('name') }}">
+              <input type="text" name="name" class=" form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" >
+                @error('name')
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
+                @enderror
             </div>
           </div>
           <div class="col-lg-8">
             <div class="form-group">
               <label for="username">Username</label>
-              <input type="text" name="username" class=" form-control" value="{{ old('username') }}">
+              <input type="text" name="username" class=" form-control @error('username') is-invalid @enderror" value="{{ old('username') }}">
+                @error('username')
+                    <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
             </div>
           </div>
           <div class="col-lg-8">
-            <div class="form-group">
+            <div class="form-group @error('roles') is-invalid @enderror">
               <input type="checkbox" name="roles[]" id="" value="ADMIN" class=" custom-checkbox">
               <label for="admin" class="mr-3">Administrator</label>
               <input type="checkbox" name="roles[]" id="" value="STAFF" class=" custom-checkbox">
@@ -44,34 +54,65 @@
               <input type="checkbox" name="roles[]" id="" value="CUSTOMER" class=" custom-checkbox">
               <label for="Customer" class=" mr-3">Customer</label>
             </div>
+            @error('roles')
+                <span class="invalid-feedback" role="alert">
+                  <strong>{{ $message }}</strong>
+                </span>
+            @enderror
           </div>
           <div class="col-lg-8">
-            <div class="form-group">
+            <div class="form-group ">
               <label for="phone">Phone number</label>
-              <input type="text" name="phone" class=" form-control" value="{{ old('phone') }}">
+              <input type="text" name="phone" class=" form-control @error('phone') is-invalid @enderror" value="{{ old('phone') }}">
+              @error('phone')
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
+              @enderror
             </div>
           </div>
           <div class="col-lg-8">
             <div class="form-group">
               <label for="email">Email</label>
-              <input type="email" name="email" class=" form-control" value="{{ old('email') }}">
+              <input type="email" name="email" class=" form-control @error('email') is-invalid @enderror" value="{{ old('email') }}">
+              @error('email')
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
+              @enderror
             </div>
           </div> 
           <div class="col-lg-8">
-            <div class="form-group">
+            <div class="form-group ">
               <label for="address">Address</label>
-              <textarea value="{{ old('address') }}" name="address" id="" rows="5" class=" form-control"></textarea>
+              <textarea  name="address" id="" rows="5" class=" form-control @error('address') is-invalid @enderror">{{ old('address') }}
+              </textarea>
+              @error('address')
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
+              @enderror
             </div>
           </div>
           <div class="col-lg-8">
-            <div class="form-group">
+            <div class="form-group ">
               <label for="password">Password</label>
-              <input type="password" name="password" class=" form-control" value="{{ old('password') }}">
+              <input type="password" name="password" class=" form-control @error('password') is-invalid @enderror" value="{{ old('password') }}" autocomplete="off">
+              @error('password')
+                    <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                    </span>
+              @enderror
             </div>
           </div>
           <div class="col-lg-8">
             <label for="">Avatar Image</label>
-            <input type="file" name="avatar" class=" form-control">
+            <input type="file" name="avatar" class=" form-control @error('avatar') is-invalid @enderror">
+            @error('avatar')
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
+            @enderror
           </div>
           <div class="col-lg-8 mt-4">
             <input type="submit" class="btn btn-success btn-block" value="save"></input>

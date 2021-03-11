@@ -32,14 +32,31 @@ Route::resource('delete-user', 'UserController');
 Route::resource('details-user', 'UserController');
 
 
+// route categories
+
 Route::get('/categories/trash', 'CategoryController@trash')->name('categories-trash');
 
 Route::get('/categories/{id}/restore', 'CategoryController@restore')->name('categories-restore');
 
 Route::delete('categories/{id}/delete-permanent', 'CategoryController@deletePermanent')->name('permanent');
 
-// route categories
 Route::resource('categories', 'CategoryController');
 
+
+// root book
+Route::get('/book/trash', 'BookController@trash')->name('book-trash');
+
+Route::get('/book/{id}/restore', 'BookController@restore')->name('book-restore');
+
+Route::delete('/book/{id}/delete-permanent', 'BookController@deletePermanent')->name('delete-book');
+
+Route::resource('book', 'BookController');
+
+// root order
+
+Route::resource('orders', 'OrderController');
+
+// route akses ajak
+Route::get('/ajax/categories/search', 'CategoryController@ajaxSearch');
 
 Auth::routes();

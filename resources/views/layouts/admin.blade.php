@@ -72,6 +72,8 @@
 
   @include('includes.admin.script')
 
+  @yield('footer-script')
+
 </body>
 
 </html>

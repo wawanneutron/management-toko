@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Http\Requests\UserRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
@@ -17,10 +18,8 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $users = User::paginate(10);
-
         $filterByEmail = $request->get('keyword');
         $status = $request->get('status');
-
 
         if ($status) {
 
@@ -32,9 +31,6 @@ class UserController extends Controller
             $users = User::where('email', 'LIKE', "%$filterByEmail%")
                 ->paginate(10);
         }
-
-
-
 
         return view('pages.users.data_users', [
             'users' => $users
@@ -57,7 +53,7 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
         // menghandle data yang dikirim dari form create
 
@@ -139,8 +135,6 @@ class UserController extends Controller
             if ($user->avatar && file_exists(storage_path('app/public/' . $user->avatar))) {
 
                 Storage::delete('public/' . $user->avatar);
-                $file = $request->file('avatar')->store('avatars', 'public');
-                $user->avatar = $file;
             }
 
             // kalo tidak ada profile di server maka lakukan penyimpanan.

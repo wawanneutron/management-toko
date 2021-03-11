@@ -14,3 +14,7 @@
   <!-- Page level custom scripts -->
   <script src="{{ url('frontend/js/demo/chart-area-demo.js') }} "></script>
   <script src="{{ url('frontend/js/demo/chart-pie-demo.js') }} "></script>
+
+
+
+  

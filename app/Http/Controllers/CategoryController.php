@@ -210,4 +210,16 @@ class CategoryController extends Controller
                 ->with('status', 'Deleted permanent is successfully');
         }
     }
+
+
+
+    // ajak
+    public function ajaxSearch(Request $request)
+    {
+        $keyword = $request->get('q');
+
+        $categories = Category::where('name', 'LIKE', "%$keyword%")->get();
+
+        return $categories;
+    }
 }
